@@ -150,6 +150,8 @@
 - 集成端脑云 GPU 服务方案
 - 确定 Claude Code MCP 集成方式
 - 创建开发进度管理文档
+- 项目上传至 GitHub: https://github.com/wengfb/ai-video
+- 完成 Claude Agent SDK 调研（见下方技术参考）
 
 ---
 
@@ -157,7 +159,7 @@
 
 | 优先级 | 事项 | 状态 |
 |-------|-----|------|
-| 高 | 确认 Claude Code SDK 具体 API | 待研究 |
+| 高 | ~~确认 Claude Code SDK 具体 API~~ | ✅ 已完成 |
 | 中 | 音频方案选择（Edge-TTS vs GPT-SoVITS） | 待决定 |
 | 中 | AnimateDiff 参数调优 | 待研究 |
 
@@ -172,3 +174,64 @@
 | M3 | 单张图片生成可用 | 未开始 |
 | M4 | 视频片段生成可用 | 未开始 |
 | M5 | 完整视频生成流程 | 未开始 |
+
+---
+
+## 技术参考
+
+### Claude Agent SDK (Python)
+
+**仓库**: https://github.com/anthropics/claude-agent-sdk-python
+
+**安装**:
+```bash
+pip install claude-agent-sdk
+```
+
+**核心 API**:
+
+#### 1. query() - 简单查询
+```python
+from claude_agent_sdk import query, ClaudeAgentOptions
+
+async for message in query(prompt="Hello Claude"):
+    print(message)
+```
+
+#### 2. ClaudeSDKClient - 交互式对话
+```python
+from claude_agent_sdk import ClaudeSDKClient, ClaudeAgentOptions
+
+async with ClaudeSDKClient(options=options) as client:
+    await client.query("Your prompt")
+    async for msg in client.receive_response():
+        print(msg)
+```
+
+#### 3. 自定义工具 (SDK MCP Server)
+```python
+from claude_agent_sdk import tool, create_sdk_mcp_server
+
+@tool("greet", "Greet a user", {"name": str})
+async def greet_user(args):
+    return {"content": [{"type": "text", "text": f"Hello, {args['name']}!"}]}
+
+server = create_sdk_mcp_server(name="my-tools", tools=[greet_user])
+```
+
+#### 4. Hooks - 钩子函数
+```python
+options = ClaudeAgentOptions(
+    hooks={
+        "PreToolUse": [HookMatcher(matcher="Bash", hooks=[check_bash_command])],
+    }
+)
+```
+
+**关键配置项 (ClaudeAgentOptions)**:
+- `system_prompt`: 系统提示词
+- `max_turns`: 最大对话轮数
+- `allowed_tools`: 允许的工具列表
+- `permission_mode`: 权限模式 (`acceptEdits` 等)
+- `cwd`: 工作目录
+- `mcp_servers`: MCP 服务器配置
