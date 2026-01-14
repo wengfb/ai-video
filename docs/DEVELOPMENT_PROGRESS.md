@@ -4,7 +4,7 @@
 
 | 阶段 | 状态 | 进度 |
 |-----|------|-----|
-| 阶段 1：基础框架 | 未开始 | 0% |
+| 阶段 1：基础框架 | ✅ 已完成 | 100% |
 | 阶段 2：项目管理 + 资产集成 | 未开始 | 0% |
 | 阶段 3：Claude 集成 | 未开始 | 0% |
 | 阶段 4：ComfyUI 集成 | 未开始 | 0% |
@@ -16,28 +16,28 @@
 ## 阶段 1：基础框架
 
 ### 1.1 后端框架搭建
-- [ ] FastAPI 项目初始化
-- [ ] 目录结构规划
-- [ ] 配置管理（环境变量、配置文件）
-- [ ] 日志系统配置
-- [ ] 异常处理框架
+- [x] FastAPI 项目初始化
+- [x] 目录结构规划
+- [x] 配置管理（环境变量、配置文件）
+- [x] 日志系统配置
+- [x] 异常处理框架
 
 ### 1.2 数据库设计与迁移
-- [ ] PostgreSQL 连接配置
-- [ ] SQLAlchemy 模型定义
-- [ ] Alembic 迁移脚本
-- [ ] 基础表创建（Project, Episode, Script 等）
+- [x] PostgreSQL 连接配置
+- [x] SQLAlchemy 模型定义
+- [x] Alembic 迁移脚本
+- [x] 基础表创建（Project, Episode, Script 等）
 
 ### 1.3 前端框架搭建
-- [ ] Next.js 项目初始化
-- [ ] 路由结构规划
-- [ ] 布局组件
-- [ ] UI 组件库选择与配置
+- [x] Next.js 项目初始化
+- [x] 路由结构规划
+- [x] 布局组件
+- [x] UI 组件库选择与配置
 
 ### 1.4 基础设施
-- [ ] Redis 连接配置
-- [ ] Celery Worker 配置
-- [ ] MinIO 对象存储配置
+- [x] Redis 连接配置
+- [x] Celery Worker 配置
+- [x] MinIO 对象存储配置
 
 ---
 
@@ -152,6 +152,10 @@
 - 创建开发进度管理文档
 - 项目上传至 GitHub: https://github.com/wengfb/ai-video
 - 完成 Claude Agent SDK 调研（见下方技术参考）
+- **完成阶段 1：基础框架开发**
+  - 后端：FastAPI + SQLAlchemy + Alembic + Redis + Celery + MinIO
+  - 前端：Next.js + TypeScript + Tailwind CSS
+  - 数据模型：Project, Episode, Script, Storyboard, Character, Scene, LoraAsset, ComfyWorkflow, GenerationTask, TaskDAG
 
 ---
 
@@ -169,7 +173,7 @@
 
 | 里程碑 | 目标 | 状态 |
 |-------|-----|------|
-| M1 | 基础框架可运行 | 未开始 |
+| M1 | 基础框架可运行 | ✅ 已完成 |
 | M2 | 项目管理功能完成 | 未开始 |
 | M3 | 单张图片生成可用 | 未开始 |
 | M4 | 视频片段生成可用 | 未开始 |
